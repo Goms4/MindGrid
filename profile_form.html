@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindGrid User Profile</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons for vector icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Use Inter font -->
+    <style>
+        :root {
+            --mindgrid-coffee: #4A3A2C; /* Dark Brown */
+            --mindgrid-mocha: #6D5B4F; /* Medium Brown */
+            --mindgrid-cocoa: #8C7B6A; /* Lighter Brown/Cocoa */
+            --mindgrid-beige: #E6E1D9; /* Light Beige/Tan */
+            --mindgrid-cream: #F5F4F0; /* Off-White/Cream */
+            --background: #FAFAFA; /* Light Background */
+            --muted-foreground: #6B7280; /* Gray for subtle text */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+        }
+        .text-mindgrid-coffee { color: var(--mindgrid-coffee); }
+        .bg-mindgrid-coffee { background-color: var(--mindgrid-coffee); }
+        .hover\:bg-mindgrid-mocha:hover { background-color: var(--mindgrid-mocha); }
+        .text-mindgrid-cream { color: var(--mindgrid-cream); }
+        .text-mindgrid-cocoa { color: var(--mindgrid-cocoa); }
+        .border-mindgrid-beige { border-color: var(--mindgrid-beige); }
+        .focus\:border-mindgrid-cocoa:focus { border-color: var(--mindgrid-cocoa); }
+        .hover\:text-mindgrid-coffee:hover { color: var(--mindgrid-coffee); }
+        .hover\:bg-mindgrid-beige:hover { background-color: var(--mindgrid-beige); }
+        .shadow-mindgrid-soft { box-shadow: 0 10px 15px -3px rgba(74, 58, 44, 0.1), 0 4px 6px -2px rgba(74, 58, 44, 0.05); }
+        .bg-card\/50 { background-color: rgba(255, 255, 255, 0.5); }
+    </style>
+</head>
+<body>
+
+    <!-- Toast Notification Container (Hidden by default) -->
+    <div id="toast-container" class="fixed top-4 right-4 z-[100] space-y-2">
+        <!-- Toast elements will be injected here -->
+    </div>
+
+    <!-- Header -->
+    <header class="border-b border-mindgrid-beige bg-card/50 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <button id="backButton" class="flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-colors text-mindgrid-cocoa hover:text-mindgrid-coffee hover:bg-mindgrid-beige">
+                    <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i>
+                    Back
+                </button>
+                <div class="text-xl font-bold text-mindgrid-coffee">
+                    <i data-lucide="grid" class="inline-block w-5 h-5 mr-1 align-text-bottom"></i>
+                    MindGrid
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 max-w-2xl">
+        <div class="text-center mb-8">
+            <!-- User Icon (Emulating MindGrid styling) -->
+            <div class="w-24 h-24 bg-mindgrid-coffee rounded-full flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="user" class="w-12 h-12 text-mindgrid-cream"></i>
+            </div>
+            <h1 class="text-3xl font-light text-mindgrid-coffee mb-2">User Profile</h1>
+            <p class="text-muted-foreground text-sm">Manage your account information and preferences</p>
+        </div>
+
+        <!-- Profile Card -->
+        <div class="bg-white rounded-xl p-6 md:p-8 border border-mindgrid-beige shadow-mindgrid-soft">
+            <div class="mb-6">
+                <h2 class="text-xl font-semibold text-mindgrid-coffee">Personal Information</h2>
+                <p class="text-muted-foreground text-sm">Update your profile details to personalize your MindGrid experience</p>
+            </div>
+            
+            <form id="profileForm" class="space-y-6">
+                <!-- First Name and Last Name -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <label for="firstName" class="block text-sm font-medium text-mindgrid-coffee">First Name</label>
+                        <input
+                            type="text"
+                            id="firstName"
+                            value="John"
+                            required
+                            class="w-full px-3 py-2 border rounded-lg text-gray-700 placeholder-gray-400 border-mindgrid-beige focus:outline-none focus:ring-1 focus:ring-mindgrid-cocoa focus:border-mindgrid-cocoa transition duration-150"
+                        >
+                    </div>
+                    <div class="space-y-2">
+                        <label for="lastName" class="block text-sm font-medium text-mindgrid-coffee">Last Name</label>
+                        <input
+                            type="text"
+                            id="lastName"
+                            value="Doe"
+                            required
+                            class="w-full px-3 py-2 border rounded-lg text-gray-700 placeholder-gray-400 border-mindgrid-beige focus:outline-none focus:ring-1 focus:ring-mindgrid-cocoa focus:border-mindgrid-cocoa transition duration-150"
+                        >
+                    </div>
+                </div>
+
+                <!-- Email Address -->
+                <div class="space-y-2">
+                    <label for="email" class="block text-sm font-medium text-mindgrid-coffee">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        value="john.doe@example.com"
+                        required
+                        class="w-full px-3 py-2 border rounded-lg text-gray-700 placeholder-gray-400 border-mindgrid-beige focus:outline-none focus:ring-1 focus:ring-mindgrid-cocoa focus:border-mindgrid-cocoa transition duration-150"
+                    >
+                </div>
+
+                <!-- Age and Gender -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <label for="age" class="block text-sm font-medium text-mindgrid-coffee">Age</label>
+                        <input
+                            type="number"
+                            id="age"
+                            value="28"
+                            min="1"
+                            class="w-full px-3 py-2 border rounded-lg text-gray-700 placeholder-gray-400 border-mindgrid-beige focus:outline-none focus:ring-1 focus:ring-mindgrid-cocoa focus:border-mindgrid-cocoa transition duration-150"
+                        >
+                    </div>
+                    <div class="space-y-2">
+                        <label for="gender" class="block text-sm font-medium text-mindgrid-coffee">Gender</label>
+                        <div class="relative">
+                            <select
+                                id="gender"
+                                class="w-full px-3 py-2 border rounded-lg text-gray-700 border-mindgrid-beige focus:outline-none focus:ring-1 focus:ring-mindgrid-cocoa focus:border-mindgrid-cocoa transition duration-150 appearance-none bg-white pr-8"
+                            >
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="non-binary">Non-binary</option>
+                                <option value="prefer-not-to-say" selected>Prefer not to say</option>
+                            </select>
+                            <i data-lucide="chevron-down" class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none text-mindgrid-cocoa"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bio -->
+                <div class="space-y-2">
+                    <label for="bio" class="block text-sm font-medium text-mindgrid-coffee">Bio</label>
+                    <textarea
+                        id="bio"
+                        placeholder="Tell us a bit about yourself..."
+                        rows="4"
+                        class="w-full px-3 py-2 border rounded-lg text-gray-700 placeholder-gray-400 border-mindgrid-beige focus:outline-none focus:ring-1 focus:ring-mindgrid-cocoa focus:border-mindgrid-cocoa transition duration-150 min-h-[100px]"
+                    >Productivity enthusiast who loves organized workflows and minimalist design.</textarea>
+                </div>
+
+                <!-- Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <button
+                        type="submit"
+                        id="saveButton"
+                        class="bg-mindgrid-coffee hover:bg-mindgrid-mocha text-mindgrid-cream font-semibold py-2 px-4 rounded-lg flex-1 transition-colors duration-200 flex items-center justify-center disabled:opacity-50"
+                    >
+                        <i data-lucide="save" id="saveIcon" class="w-4 h-4 mr-2"></i>
+                        <span id="buttonText">Save Changes</span>
+                    </button>
+                    <button
+                        type="button"
+                        id="cancelButton"
+                        class="border border-mindgrid-cocoa text-mindgrid-cocoa font-semibold py-2 px-4 rounded-lg flex-1 transition-colors duration-200 hover:bg-mindgrid-beige"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Initial Profile State (simulating useState)
+        let profile = {
+            firstName: 'John',
+            lastName: 'Doe',
+            email: 'john.doe@example.com',
+            age: '28',
+            gender: 'prefer-not-to-say',
+            bio: 'Productivity enthusiast who loves organized workflows and minimalist design.'
+        };
+
+        let isLoading = false;
+        
+        // --- Helper Functions ---
+
+        /**
+         * Custom "Toast" function to display a notification.
+         */
+        function showToast(title, description) {
+            const toastContainer = document.getElementById('toast-container');
+            const toastElement = document.createElement('div');
+            
+            // Tailwind classes for the toast card
+            toastElement.className = 'bg-white border border-green-200 rounded-lg p-4 shadow-xl max-w-xs transition-opacity duration-300';
+            toastElement.innerHTML = `
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 pt-0.5">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-green-500"></i>
+                    </div>
+                    <div class="ml-3 w-0 flex-1 pt-0.5">
+                        <p class="text-sm font-medium text-gray-900">${title}</p>
+                        <p class="mt-1 text-sm text-gray-500">${description}</p>
+                    </div>
+                </div>
+            `;
+            
+            // Re-render Lucide icons inside the new toast
+            lucide.createIcons({ attr: 'data-lucide', element: toastElement });
+
+            toastContainer.appendChild(toastElement);
+
+            // Automatically hide after 4 seconds
+            setTimeout(() => {
+                toastElement.classList.add('opacity-0');
+                // Remove the element after the fade-out transition
+                setTimeout(() => toastElement.remove(), 300); 
+            }, 4000);
+        }
+
+        /**
+         * Updates the state and form inputs based on the new profile object.
+         */
+        function updateFormInputs() {
+            document.getElementById('firstName').value = profile.firstName;
+            document.getElementById('lastName').value = profile.lastName;
+            document.getElementById('email').value = profile.email;
+            document.getElementById('age').value = profile.age;
+            document.getElementById('gender').value = profile.gender;
+            document.getElementById('bio').value = profile.bio;
+        }
+
+        /**
+         * Handles the form submission logic.
+         */
+        function handleSave(event) {
+            event.preventDefault();
+
+            if (isLoading) return; // Prevent double submission
+
+            isLoading = true;
+            updateButtonState();
+
+            // Simulate API call delay
+            setTimeout(() => {
+                // In a real app, you would send the 'profile' data to the server here.
+                
+                isLoading = false;
+                updateButtonState();
+
+                showToast("Profile Updated", "Your profile information has been saved successfully.");
+
+            }, 1000);
+        }
+        
+        /**
+         * Updates the save button text and state.
+         */
+        function updateButtonState() {
+            const button = document.getElementById('saveButton');
+            const buttonText = document.getElementById('buttonText');
+            
+            if (isLoading) {
+                buttonText.textContent = 'Saving...';
+                button.disabled = true;
+            } else {
+                buttonText.textContent = 'Save Changes';
+                button.disabled = false;
+            }
+        }
+
+        /**
+         * Captures input changes and updates the 'profile' state object.
+         */
+        function handleInputChange(event) {
+            const field = event.target.id;
+            const value = event.target.value;
+            profile = { ...profile, [field]: value };
+        }
+
+        // --- Event Listeners and Initialization ---
+
+        // Attach the submit handler to the form
+        document.getElementById('profileForm').addEventListener('submit', handleSave);
+
+        // Attach change listeners to all relevant input fields
+        const inputFields = ['firstName', 'lastName', 'email', 'age', 'gender', 'bio'];
+        inputFields.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.addEventListener('input', handleInputChange);
+            }
+        });
+
+        // Initialize form with initial state
+        updateFormInputs();
+
+        // Update navigation to link to the welcome.html page
+        const welcomePagePath = 'welcome.html'; 
+
+        document.getElementById('backButton').addEventListener('click', () => {
+            window.location.href = welcomePagePath;
+        });
+        document.getElementById('cancelButton').addEventListener('click', () => {
+             // You might want to save current changes or confirm discard before navigating
+             window.location.href = welcomePagePath;
+        });
+
+    </script>
+</body>
+</html>
